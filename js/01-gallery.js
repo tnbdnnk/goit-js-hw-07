@@ -10,7 +10,11 @@ function handleImgClick(e) {
         return;
     }
 
-    const modal = basicLightbox.create(` <img class="gallery__image" src="${e.target.dataset.source}"/> `);
+    const modal = basicLightbox.create(` <img class="gallery__image" src="${e.target.dataset.source}"/> `,
+    {
+        onShow: (modal) => {document.addEventListener('keydown', escModal)},
+        onClose: (modal) => {document.removeEventListener('keydown', escModal)},
+    });
     modal.show();
 
     document.addEventListener('keydown', escModal);
